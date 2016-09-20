@@ -3,11 +3,14 @@ package com.example.ankitsharma.paint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+
+import timber.log.Timber;
 
 /**
  * Created by ankitsharma on 9/19/16.
@@ -79,6 +82,13 @@ public class PaintView extends View {
 
         invalidate();
         return true;
+    }
+
+    public void onClear() {
+        Timber.d("Inside onClear PaintView");
+        canvas.drawColor(getResources().getColor(R.color.paintColor));
+        drawPath = new Path();
+        invalidate();
     }
 
 

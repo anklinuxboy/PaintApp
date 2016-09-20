@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:myapp="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,40 +9,111 @@
     <com.example.ankitsharma.paint.PaintView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
         android:id="@+id/custom_paint_view"
         android:background="@color/paintColor"
         />
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <ImageButton
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:id="@+id/pallete_icon"
+        android:src="@drawable/ic_palette_black_24dp"
+        android:layout_alignParentBottom="true"
+        />
 
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/pallete_icon"
-            android:src="@drawable/ic_palette_black_24dp"
-            />
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/brush_icon"
+        android:src="@drawable/ic_brush_black_24dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/pallete_icon"
+        android:layout_toEndOf="@+id/pallete_icon"
+        android:layout_marginLeft="19dp"
+        android:layout_marginStart="19dp"
+        />
 
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/brush_icon"
-            android:src="@drawable/ic_brush_black_24dp"
-            />
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/delete_icon"
+        android:src="@drawable/ic_close_black_24dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        />
 
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/delete_icon"
-            android:src="@drawable/ic_close_black_24dp"
-            android:layout_gravity="end"
-            android:layout_marginLeft="40dp"
-            />
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/pallete_color_icon_24"
+        android:backgroundTint="@color/black"
+        android:layout_above="@+id/pallete_icon"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="5dp"
+        android:id="@+id/black_button"
+        android:visibility="gone"
+        />
 
-    </LinearLayout>
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/pallete_color_icon_24"
+        android:layout_above="@+id/black_button"
+        android:backgroundTint="@color/blue"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="10dp"
+        android:id="@+id/blue_button"
+        android:visibility="gone"
+        />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/pallete_color_icon_24"
+        android:layout_above="@+id/blue_button"
+        android:backgroundTint="@color/red"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="5dp"
+        android:id="@+id/red_button"
+        android:visibility="gone"
+        />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/pallete_color_icon_24"
+        android:layout_above="@+id/red_button"
+        android:backgroundTint="@color/green"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="5dp"
+        android:id="@+id/green_button"
+        android:visibility="gone"
+        />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/pallete_color_icon_24"
+        android:layout_above="@+id/green_button"
+        android:backgroundTint="@color/magenta"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="10dp"
+        android:id="@+id/magenta_button"
+        android:visibility="gone"
+        />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/pallete_color_icon_24"
+        android:layout_above="@+id/magenta_button"
+        android:backgroundTint="@color/yellow"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="5dp"
+        android:id="@+id/yellow_button"
+        android:visibility="gone"
+        />
 
 
-</LinearLayout>
+</RelativeLayout>

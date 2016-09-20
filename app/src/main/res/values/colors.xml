@@ -5,4 +5,12 @@
     <color name="colorAccent">#FF4081</color>
     <color name="paintColor">#E6E6E6</color>
     <color name="brushColor">#000000</color>
+
+    <!--Colors for Pallete-->
+    <color name="red">#FF0000</color>
+    <color name="green">#00FF00</color>
+    <color name="black">#000000</color>
+    <color name="yellow">#ffff00</color>
+    <color name="blue">#0000ff</color>
+    <color name="magenta">#ff00bf</color>
 </resources>
