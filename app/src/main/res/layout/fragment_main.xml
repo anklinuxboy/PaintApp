@@ -115,5 +115,54 @@
         android:visibility="gone"
         />
 
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/brightness_1"
+        android:layout_above="@+id/brush_icon"
+        android:layout_alignLeft="@+id/brush_icon"
+        android:layout_alignStart="@+id/brush_icon"
+        android:id="@+id/brush_24"
+        android:visibility="gone"
+        />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/brush_width_18"
+        android:layout_above="@+id/brush_24"
+        android:layout_alignLeft="@+id/brush_icon"
+        android:layout_alignStart="@+id/brush_icon"
+        android:layout_marginLeft="2dp"
+        android:layout_marginStart="2dp"
+        android:id="@+id/brush_18"
+        android:visibility="gone"
+        />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/brush_width_12"
+        android:layout_above="@+id/brush_18"
+        android:layout_alignLeft="@+id/brush_icon"
+        android:layout_alignStart="@+id/brush_icon"
+        android:layout_marginLeft="4dp"
+        android:layout_marginStart="4dp"
+        android:id="@+id/brush_12"
+        android:visibility="gone"
+        />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/brush_width_6"
+        android:layout_above="@+id/brush_12"
+        android:layout_alignLeft="@+id/brush_icon"
+        android:layout_alignStart="@+id/brush_icon"
+        android:layout_marginLeft="6dp"
+        android:layout_marginStart="6dp"
+        android:id="@+id/brush_6"
+        android:visibility="gone"
+        />
 
 </RelativeLayout>
