@@ -120,6 +120,18 @@
         android:layout_height="wrap_content"
         android:src="@drawable/brightness_1"
         android:layout_above="@+id/brush_icon"
+        android:tint="@color/paintColor"
+        android:layout_alignLeft="@+id/brush_icon"
+        android:layout_alignStart="@+id/brush_icon"
+        android:visibility="gone"
+        android:id="@+id/eraser_icon"
+        />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/brightness_1"
+        android:layout_above="@+id/eraser_icon"
         android:layout_alignLeft="@+id/brush_icon"
         android:layout_alignStart="@+id/brush_icon"
         android:id="@+id/brush_24"
@@ -164,5 +176,7 @@
         android:id="@+id/brush_6"
         android:visibility="gone"
         />
+
+
 
 </RelativeLayout>

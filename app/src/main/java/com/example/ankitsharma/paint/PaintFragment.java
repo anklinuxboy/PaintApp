@@ -53,6 +53,8 @@ public class PaintFragment extends Fragment implements View.OnClickListener {
     ImageButton brush12;
     @BindView(R.id.brush_6)
     ImageButton brush6;
+    @BindView((R.id.eraser_icon))
+    ImageButton eraser;
 
     private boolean palleteVisible = false;
     private boolean brushVisible = false;
@@ -94,7 +96,7 @@ public class PaintFragment extends Fragment implements View.OnClickListener {
     }
 
     @OnClick({R.id.delete_icon, R.id.brush_icon, R.id.pallete_icon, R.id.black_button,
-     R.id.blue_button, R.id.red_button, R.id.yellow_button, R.id.green_button,
+     R.id.blue_button, R.id.red_button, R.id.yellow_button, R.id.green_button, R.id.eraser_icon,
      R.id.magenta_button, R.id.brush_12, R.id.brush_24, R.id.brush_18, R.id.brush_6})
     public void onClick(View view) {
         switch (view.getId()) {
@@ -140,6 +142,9 @@ public class PaintFragment extends Fragment implements View.OnClickListener {
             case R.id.brush_6:
                 paintView.setBrushWidth(SMALL_BRUSH_WIDTH);
                 break;
+            case R.id.eraser_icon:
+                paintView.setBrushColor(getResources().getColor(R.color.paintColor));
+                break;
             default:
                 break;
         }
@@ -151,12 +156,14 @@ public class PaintFragment extends Fragment implements View.OnClickListener {
             brush18.setVisibility(View.VISIBLE);
             brush12.setVisibility(View.VISIBLE);
             brush6.setVisibility(View.VISIBLE);
+            eraser.setVisibility(View.VISIBLE);
             brushVisible = true;
         } else {
             brush24.setVisibility(View.GONE);
             brush18.setVisibility(View.GONE);
             brush12.setVisibility(View.GONE);
             brush6.setVisibility(View.GONE);
+            eraser.setVisibility(View.GONE);
             brushVisible = false;
         }
     }

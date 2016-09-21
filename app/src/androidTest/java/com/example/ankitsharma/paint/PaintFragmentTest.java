@@ -43,21 +43,6 @@ public class PaintFragmentTest {
     public ActivityTestRule<MainActivity> activityRule =
             new ActivityTestRule<>(MainActivity.class);
 
-//    @Test
-//    public void testPalleteClick() {
-//        sleepForOneSecond();
-//        onView(withId(R.id.pallete_icon))
-//                .perform(click())
-//                .check(matches(isDisplayed()));
-//    }
-//
-//    @Test
-//    public void testBrushClick() {
-//        sleepForOneSecond();
-//        onView(withId(R.id.brush_icon))
-//                .perform(click())
-//                .check(matches(isDisplayed()));
-//    }
 
     @Before
     public void setup() {
@@ -141,6 +126,8 @@ public class PaintFragmentTest {
     public void testWriteOnScreen() {
         sleepForOneSecond();
         onView(withId(R.id.custom_paint_view)).perform(swipeDown());
+        sleepForOneSecond();
+        onView(withId(R.id.delete_icon)).perform(click());
         sleepForOneSecond();
     }
 
