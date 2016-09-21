@@ -59,6 +59,9 @@ public class PaintFragment extends Fragment implements View.OnClickListener {
     private boolean palleteVisible = false;
     private boolean brushVisible = false;
 
+    private SimplePresenter presenter;
+    private PaintFragment paintFragment;
+
     int RED = Color.RED;
     int GREEN = Color.GREEN;
     int YELLOW = Color.YELLOW;
@@ -75,6 +78,8 @@ public class PaintFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
+        presenter = new SimplePresenter();
+
         ButterKnife.bind(this, view);
         deleteButton.setOnClickListener(this);
         brushButton.setOnClickListener(this);
@@ -102,7 +107,7 @@ public class PaintFragment extends Fragment implements View.OnClickListener {
         switch (view.getId()) {
             case R.id.delete_icon:
                 Timber.d("Delete Button Pressed");
-                paintView.onClear();
+                presenter.clearCanvas(paintView);
                 break;
             case R.id.brush_icon:
                 Timber.d("Brush Button Pressed");
@@ -113,37 +118,37 @@ public class PaintFragment extends Fragment implements View.OnClickListener {
                 setPalleteVisible();
                 break;
             case R.id.black_button:
-                paintView.setBrushColor(BLACK);
+                presenter.changeBrushColor(paintView, BLACK);
                 break;
             case R.id.blue_button:
-                paintView.setBrushColor(BLUE);
+                presenter.changeBrushColor(paintView, BLUE);
                 break;
             case R.id.red_button:
-                paintView.setBrushColor(RED);
+                presenter.changeBrushColor(paintView, RED);
                 break;
             case R.id.green_button:
-                paintView.setBrushColor(GREEN);
+                presenter.changeBrushColor(paintView, GREEN);
                 break;
             case R.id.magenta_button:
-                paintView.setBrushColor(MAGENTA);
+                presenter.changeBrushColor(paintView, MAGENTA);
                 break;
             case R.id.yellow_button:
-                paintView.setBrushColor(YELLOW);
+                presenter.changeBrushColor(paintView, YELLOW);
                 break;
             case R.id.brush_24:
-                paintView.setBrushWidth(XLARGE_BRUSH_WIDTH);
+                presenter.changeBrushWidth(paintView, XLARGE_BRUSH_WIDTH);
                 break;
             case R.id.brush_18:
-                paintView.setBrushWidth(LARGE_BRUSH_WIDTH);
+                presenter.changeBrushWidth(paintView, LARGE_BRUSH_WIDTH);
                 break;
             case R.id.brush_12:
-                paintView.setBrushWidth(MEDIUM_BRUSH_WIDTH);
+                presenter.changeBrushWidth(paintView, MEDIUM_BRUSH_WIDTH);
                 break;
             case R.id.brush_6:
-                paintView.setBrushWidth(SMALL_BRUSH_WIDTH);
+                presenter.changeBrushWidth(paintView, SMALL_BRUSH_WIDTH);
                 break;
             case R.id.eraser_icon:
-                paintView.setBrushColor(getResources().getColor(R.color.paintColor));
+                presenter.eraseCanvas(paintView);
                 break;
             default:
                 break;

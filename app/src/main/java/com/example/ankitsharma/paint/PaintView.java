@@ -23,6 +23,7 @@ public class PaintView extends View {
 
     private Canvas canvas;
     private Bitmap bitmap;
+    private int ERASER_BRUSH_WIDTH = 20;
 
 
     public PaintView(Context context, AttributeSet attrs) {
@@ -114,6 +115,17 @@ public class PaintView extends View {
         drawPaint.setAntiAlias(true);
         drawPaint.setStrokeWidth(width);
         Utility.saveBrushWidthPref(getContext(), width);
+        drawPaint.setStyle(Paint.Style.STROKE);
+        drawPaint.setStrokeJoin(Paint.Join.ROUND);
+        drawPaint.setStrokeCap(Paint.Cap.ROUND);
+    }
+
+    public void setEraser() {
+        drawPath = new Path();
+        drawPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        drawPaint.setColor(getResources().getColor(R.color.paintColor));
+        drawPaint.setAntiAlias(true);
+        drawPaint.setStrokeWidth(ERASER_BRUSH_WIDTH);
         drawPaint.setStyle(Paint.Style.STROKE);
         drawPaint.setStrokeJoin(Paint.Join.ROUND);
         drawPaint.setStrokeCap(Paint.Cap.ROUND);
