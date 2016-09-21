@@ -20,7 +20,7 @@ public class PaintView extends View {
     private Path drawPath;
     private Paint drawPaint,
             canvasPaint;
-    private int PAINTCOLOR = getResources().getColor(R.color.brushColor);
+
     private Canvas canvas;
     private Bitmap bitmap;
 
@@ -33,9 +33,11 @@ public class PaintView extends View {
     private void init() {
         drawPath = new Path();
         drawPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        drawPaint.setColor(PAINTCOLOR);
+        int color = Utility.getBrushColorPref(getContext());
+        drawPaint.setColor(color);
         drawPaint.setAntiAlias(true);
-        drawPaint.setStrokeWidth(20);
+        int width = Utility.getBrushWidthPref(getContext());
+        drawPaint.setStrokeWidth(width);
         drawPaint.setStyle(Paint.Style.STROKE);
         drawPaint.setStrokeJoin(Paint.Join.ROUND);
         drawPaint.setStrokeCap(Paint.Cap.ROUND);
@@ -89,6 +91,32 @@ public class PaintView extends View {
         canvas.drawColor(getResources().getColor(R.color.paintColor));
         drawPath = new Path();
         invalidate();
+    }
+
+    public void setBrushColor(int color) {
+        drawPath = new Path();
+        drawPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        drawPaint.setColor(color);
+        Utility.saveBrushColorPref(getContext(), color);
+        drawPaint.setAntiAlias(true);
+        int width = Utility.getBrushWidthPref(getContext());
+        drawPaint.setStrokeWidth(width);
+        drawPaint.setStyle(Paint.Style.STROKE);
+        drawPaint.setStrokeJoin(Paint.Join.ROUND);
+        drawPaint.setStrokeCap(Paint.Cap.ROUND);
+    }
+
+    public void setBrushWidth(int width) {
+        drawPath = new Path();
+        drawPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        int color = Utility.getBrushColorPref(getContext());
+        drawPaint.setColor(color);
+        drawPaint.setAntiAlias(true);
+        drawPaint.setStrokeWidth(width);
+        Utility.saveBrushWidthPref(getContext(), width);
+        drawPaint.setStyle(Paint.Style.STROKE);
+        drawPaint.setStrokeJoin(Paint.Join.ROUND);
+        drawPaint.setStrokeCap(Paint.Cap.ROUND);
     }
 
 

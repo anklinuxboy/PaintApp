@@ -64,6 +64,11 @@ public class PaintFragment extends Fragment implements View.OnClickListener {
     int BLUE = Color.BLUE;
     int BLACK = Color.BLACK;
 
+    int XLARGE_BRUSH_WIDTH = 20;
+    int LARGE_BRUSH_WIDTH = 14;
+    int MEDIUM_BRUSH_WIDTH = 10;
+    int SMALL_BRUSH_WIDTH = 4;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -105,6 +110,36 @@ public class PaintFragment extends Fragment implements View.OnClickListener {
             case R.id.pallete_icon:
                 Timber.d("Pallete Button Pressed");
                 setPalleteVisible();
+                break;
+            case R.id.black_button:
+                paintView.setBrushColor(BLACK);
+                break;
+            case R.id.blue_button:
+                paintView.setBrushColor(BLUE);
+                break;
+            case R.id.red_button:
+                paintView.setBrushColor(RED);
+                break;
+            case R.id.green_button:
+                paintView.setBrushColor(GREEN);
+                break;
+            case R.id.magenta_button:
+                paintView.setBrushColor(MAGENTA);
+                break;
+            case R.id.yellow_button:
+                paintView.setBrushColor(YELLOW);
+                break;
+            case R.id.brush_24:
+                paintView.setBrushWidth(XLARGE_BRUSH_WIDTH);
+                break;
+            case R.id.brush_18:
+                paintView.setBrushWidth(LARGE_BRUSH_WIDTH);
+                break;
+            case R.id.brush_12:
+                paintView.setBrushWidth(MEDIUM_BRUSH_WIDTH);
+                break;
+            case R.id.brush_6:
+                paintView.setBrushWidth(SMALL_BRUSH_WIDTH);
                 break;
             default:
                 return;
