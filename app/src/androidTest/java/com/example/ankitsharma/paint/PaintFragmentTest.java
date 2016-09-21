@@ -19,6 +19,7 @@ import timber.log.Timber;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.action.ViewActions.swipeDown;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.action.ViewActions.typeTextIntoFocusedView;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
@@ -134,6 +135,13 @@ public class PaintFragmentTest {
                 .perform(click());
 
         assertEquals(BRUSH12_WIDTH, Utility.getBrushWidthPref(context));
+    }
+
+    @Test
+    public void testWriteOnScreen() {
+        sleepForOneSecond();
+        onView(withId(R.id.custom_paint_view)).perform(swipeDown());
+        sleepForOneSecond();
     }
 
     private void sleepForOneSecond() {
