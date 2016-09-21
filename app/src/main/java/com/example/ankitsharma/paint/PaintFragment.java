@@ -93,9 +93,8 @@ public class PaintFragment extends Fragment implements View.OnClickListener {
         return view;
     }
 
-    @Nullable
-    @OnClick({R.id.delete_icon, R.id.brush_icon, R.id.pallete_icon,
-    R.id.black_button, R.id.blue_button, R.id.red_button, R.id.yellow_button, R.id.green_button,
+    @OnClick({R.id.delete_icon, R.id.brush_icon, R.id.pallete_icon, R.id.black_button,
+     R.id.blue_button, R.id.red_button, R.id.yellow_button, R.id.green_button,
      R.id.magenta_button, R.id.brush_12, R.id.brush_24, R.id.brush_18, R.id.brush_6})
     public void onClick(View view) {
         switch (view.getId()) {
@@ -142,12 +141,12 @@ public class PaintFragment extends Fragment implements View.OnClickListener {
                 paintView.setBrushWidth(SMALL_BRUSH_WIDTH);
                 break;
             default:
-                return;
+                break;
         }
     }
 
     private void setBrushWidthVisible() {
-        if (brushVisible == false) {
+        if (!brushVisible) {
             brush24.setVisibility(View.VISIBLE);
             brush18.setVisibility(View.VISIBLE);
             brush12.setVisibility(View.VISIBLE);
@@ -163,7 +162,7 @@ public class PaintFragment extends Fragment implements View.OnClickListener {
     }
 
     private void setPalleteVisible() {
-        if (palleteVisible == false) {
+        if (!palleteVisible) {
             blackButton.setVisibility(View.VISIBLE);
             redButton.setVisibility(View.VISIBLE);
             blueButton.setVisibility(View.VISIBLE);

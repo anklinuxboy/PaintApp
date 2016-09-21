@@ -34,6 +34,4 @@ public class Utility {
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
         return pref.getInt(BRUSH_WIDTH_PREFERENCE, DEFAULT_BRUSH_WIDTH);
     }
-
-
 }

@@ -118,6 +118,4 @@ public class PaintView extends View {
         drawPaint.setStrokeJoin(Paint.Join.ROUND);
         drawPaint.setStrokeCap(Paint.Cap.ROUND);
     }
-
-
 }
