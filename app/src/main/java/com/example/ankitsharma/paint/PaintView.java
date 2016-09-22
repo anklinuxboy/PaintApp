@@ -31,16 +31,12 @@ public class PaintView extends View implements PaintViewCallback {
     }
 
     private void init() {
-        drawPath = new Path();
-        drawPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        makePathPaintObj();
         int color = Utility.getBrushColorPref(getContext());
         drawPaint.setColor(color);
-        drawPaint.setAntiAlias(true);
         int width = Utility.getBrushWidthPref(getContext());
         drawPaint.setStrokeWidth(width);
-        drawPaint.setStyle(Paint.Style.STROKE);
-        drawPaint.setStrokeJoin(Paint.Join.ROUND);
-        drawPaint.setStrokeCap(Paint.Cap.ROUND);
+        setStyle(drawPaint);
 
         canvasPaint = new Paint(Paint.DITHER_FLAG);
     }
@@ -94,49 +90,39 @@ public class PaintView extends View implements PaintViewCallback {
     }
 
     public void setBrushColor(int color) {
-        drawPath = new Path();
-        drawPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        makePathPaintObj();
         drawPaint.setColor(color);
         Utility.saveBrushColorPref(getContext(), color);
-        drawPaint.setAntiAlias(true);
         int width = Utility.getBrushWidthPref(getContext());
         drawPaint.setStrokeWidth(width);
-        drawPaint.setStyle(Paint.Style.STROKE);
-        drawPaint.setStrokeJoin(Paint.Join.ROUND);
-        drawPaint.setStrokeCap(Paint.Cap.ROUND);
+        setStyle(drawPaint);
     }
 
     public void setBrushWidth(int width) {
-        drawPath = new Path();
-        drawPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        makePathPaintObj();
         int color = Utility.getBrushColorPref(getContext());
         drawPaint.setColor(color);
-        drawPaint.setAntiAlias(true);
         drawPaint.setStrokeWidth(width);
         Utility.saveBrushWidthPref(getContext(), width);
-        drawPaint.setStyle(Paint.Style.STROKE);
-        drawPaint.setStrokeJoin(Paint.Join.ROUND);
-        drawPaint.setStrokeCap(Paint.Cap.ROUND);
+        setStyle(drawPaint);
     }
 
     public void setEraser() {
-        drawPath = new Path();
-        drawPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        makePathPaintObj();
         drawPaint.setColor(getResources().getColor(R.color.paintColor));
-        drawPaint.setAntiAlias(true);
         drawPaint.setStrokeWidth(ERASER_BRUSH_WIDTH);
-        drawPaint.setStyle(Paint.Style.STROKE);
-        drawPaint.setStrokeJoin(Paint.Join.ROUND);
-        drawPaint.setStrokeCap(Paint.Cap.ROUND);
+        setStyle(drawPaint);
     }
 
-    private void setupDrawPath() {
+    private void makePathPaintObj() {
         drawPath = new Path();
         drawPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        drawPaint.setAntiAlias(true);
-        drawPaint.setStrokeWidth(ERASER_BRUSH_WIDTH);
-        drawPaint.setStyle(Paint.Style.STROKE);
-        drawPaint.setStrokeJoin(Paint.Join.ROUND);
-        drawPaint.setStrokeCap(Paint.Cap.ROUND);
+    }
+
+    private void setStyle(Paint paint) {
+        paint.setAntiAlias(true);
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeJoin(Paint.Join.ROUND);
+        paint.setStrokeCap(Paint.Cap.ROUND);
     }
 }

@@ -176,7 +176,4 @@
         android:id="@+id/brush_6"
         android:visibility="gone"
         />
-
-
-
 </RelativeLayout>

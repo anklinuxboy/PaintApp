@@ -5,6 +5,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.support.v7.app.WindowDecorActionBar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +41,8 @@ public class PaintFragment extends Fragment implements View.OnClickListener {
 
     private boolean palleteVisible = false;
     private boolean brushVisible = false;
+    private final String PALLETE_KEY = "palleteKey";
+    private final String BRUSH_KEY = "brushKey";
 
     private SimplePresenter presenter;
 
@@ -69,6 +73,32 @@ public class PaintFragment extends Fragment implements View.OnClickListener {
         return view;
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        savedInstanceState.putBoolean(PALLETE_KEY, palleteVisible);
+        savedInstanceState.putBoolean(BRUSH_KEY, brushVisible);
+        super.onSaveInstanceState(savedInstanceState);
+    }
+
+    @Override
+    public void onViewStateRestored(Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+        if (savedInstanceState != null) {
+            palleteVisible = savedInstanceState.getBoolean(PALLETE_KEY);
+            brushVisible = savedInstanceState.getBoolean(BRUSH_KEY);
+            setRotateVisibility();
+        }
+    }
+
+    private void setRotateVisibility() {
+        if (palleteVisible) {
+            changeVisibility(palleteButtons, View.VISIBLE);
+        }
+        if (brushVisible) {
+            changeVisibility(brushButtons, View.VISIBLE);
+        }
+    }
+
     @OnClick({R.id.delete_icon, R.id.brush_icon, R.id.pallete_icon, R.id.black_button,
      R.id.blue_button, R.id.red_button, R.id.yellow_button, R.id.green_button, R.id.eraser_icon,
      R.id.magenta_button, R.id.brush_12, R.id.brush_24, R.id.brush_18, R.id.brush_6})
@@ -79,6 +109,7 @@ public class PaintFragment extends Fragment implements View.OnClickListener {
                 presenter.clearCanvas();
                 break;
             case R.id.brush_icon:
+                //Log.d("sss", "sdfsfd");
                 Timber.d("Brush Button Pressed");
                 setBrushWidthVisible();
                 break;

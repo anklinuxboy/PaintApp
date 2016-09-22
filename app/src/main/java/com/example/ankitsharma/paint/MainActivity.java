@@ -11,13 +11,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Timber.plant(new Timber.DebugTree());
-        startFragment();
-    }
-
-    private void startFragment() {
-        getFragmentManager().beginTransaction()
-                .add(R.id.paint_fragment, new PaintFragment())
-                .commit();
+        if (savedInstanceState == null) {
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.paint_fragment, new PaintFragment())
+                    .commit();
+        }
     }
 }
