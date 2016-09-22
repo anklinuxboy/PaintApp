@@ -35,7 +35,7 @@ import static org.junit.Assert.assertEquals;
  */
 
 @RunWith(AndroidJUnit4.class)
-public class PaintFragmentTest {
+public class TestPaintFragment {
 
     private Context context;
 
@@ -51,7 +51,7 @@ public class PaintFragmentTest {
 
     @Test
     public void testBothPalleteBrushClick() {
-        sleepForOneSecond();
+        //sleepForOneSecond();
         onView(withId(R.id.pallete_icon))
                 .perform(click())
                 .check(matches(isDisplayed()));
@@ -62,7 +62,7 @@ public class PaintFragmentTest {
 
     @Test
     public void testPalleteColorsVisible() {
-        sleepForOneSecond();
+        //sleepForOneSecond();
         onView(withId(R.id.pallete_icon))
                 .perform(click());
 
@@ -82,7 +82,7 @@ public class PaintFragmentTest {
 
     @Test
     public void testBrushWidthsVisible() {
-        sleepForOneSecond();
+        //sleepForOneSecond();
 
         onView(withId(R.id.brush_icon))
                 .perform(click());
@@ -99,11 +99,11 @@ public class PaintFragmentTest {
 
     @Test
     public void testColorSharedPreference() {
-        sleepForOneSecond();
+        //sleepForOneSecond();
 
         onView(withId(R.id.pallete_icon))
                 .perform(click());
-        sleepForOneSecond();
+        //sleepForOneSecond();
         onView(withId(R.id.blue_button))
                 .perform(click());
         assertEquals(Color.BLUE, Utility.getBrushColorPref(context));
@@ -112,10 +112,10 @@ public class PaintFragmentTest {
     @Test
     public void testBrushWidthPreference() {
         int BRUSH12_WIDTH = 10;
-        sleepForOneSecond();
+        //sleepForOneSecond();
         onView(withId(R.id.brush_icon))
                 .perform(click());
-        sleepForOneSecond();
+        //sleepForOneSecond();
         onView(withId(R.id.brush_12))
                 .perform(click());
 
@@ -124,11 +124,11 @@ public class PaintFragmentTest {
 
     @Test
     public void testWriteOnScreen() {
-        sleepForOneSecond();
+        //sleepForOneSecond();
         onView(withId(R.id.custom_paint_view)).perform(swipeDown());
-        sleepForOneSecond();
+        //sleepForOneSecond();
         onView(withId(R.id.delete_icon)).perform(click());
-        sleepForOneSecond();
+        //sleepForOneSecond();
     }
 
     private void sleepForOneSecond() {

@@ -10,7 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
+import java.util.List;
+
 import butterknife.BindView;
+import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import timber.log.Timber;
@@ -21,46 +24,23 @@ import timber.log.Timber;
 public class PaintFragment extends Fragment implements View.OnClickListener {
     public PaintFragment() {}
 
-    @BindView(R.id.delete_icon)
-    ImageButton deleteButton;
-    @BindView(R.id.brush_icon)
-    ImageButton brushButton;
-    @BindView(R.id.pallete_icon)
-    ImageButton palleteButton;
+    @BindViews({R.id.pallete_icon, R.id.brush_icon, R.id.delete_icon})
+    List<ImageButton> mainButtons;
+
     @BindView(R.id.custom_paint_view)
     PaintView paintView;
 
-    // Pallete Buttons
-    @BindView(R.id.black_button)
-    ImageButton blackButton;
-    @BindView(R.id.blue_button)
-    ImageButton blueButton;
-    @BindView(R.id.red_button)
-    ImageButton redButton;
-    @BindView(R.id.green_button)
-    ImageButton greenButton;
-    @BindView(R.id.yellow_button)
-    ImageButton yellowButton;
-    @BindView(R.id.magenta_button)
-    ImageButton magentaButton;
+    @BindViews({R.id.black_button, R.id.blue_button, R.id.red_button, R.id.green_button,
+            R.id.magenta_button, R.id.yellow_button})
+    List<ImageButton> palleteButtons;
 
-    // Brush Buttons
-    @BindView(R.id.brush_24)
-    ImageButton brush24;
-    @BindView(R.id.brush_18)
-    ImageButton brush18;
-    @BindView(R.id.brush_12)
-    ImageButton brush12;
-    @BindView(R.id.brush_6)
-    ImageButton brush6;
-    @BindView((R.id.eraser_icon))
-    ImageButton eraser;
+    @BindViews({R.id.brush_24, R.id.brush_18, R.id.brush_12, R.id.brush_6, R.id.eraser_icon})
+    List<ImageButton> brushButtons;
 
     private boolean palleteVisible = false;
     private boolean brushVisible = false;
 
     private SimplePresenter presenter;
-    private PaintFragment paintFragment;
 
     int RED = Color.RED;
     int GREEN = Color.GREEN;
@@ -78,24 +58,13 @@ public class PaintFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
-        presenter = new SimplePresenter();
 
         ButterKnife.bind(this, view);
-        deleteButton.setOnClickListener(this);
-        brushButton.setOnClickListener(this);
-        palleteButton.setOnClickListener(this);
-        // Set up listeners on pallete
-        blackButton.setOnClickListener(this);
-        blueButton.setOnClickListener(this);
-        greenButton.setOnClickListener(this);
-        yellowButton.setOnClickListener(this);
-        magentaButton.setOnClickListener(this);
-        redButton.setOnClickListener(this);
-        // listeners for brush width
-        brush24.setOnClickListener(this);
-        brush18.setOnClickListener(this);
-        brush12.setOnClickListener(this);
-        brush6.setOnClickListener(this);
+        presenter = new SimplePresenter(paintView);
+
+        setClickListeners(mainButtons);
+        setClickListeners(palleteButtons);
+        setClickListeners(brushButtons);
 
         return view;
     }
@@ -107,7 +76,7 @@ public class PaintFragment extends Fragment implements View.OnClickListener {
         switch (view.getId()) {
             case R.id.delete_icon:
                 Timber.d("Delete Button Pressed");
-                presenter.clearCanvas(paintView);
+                presenter.clearCanvas();
                 break;
             case R.id.brush_icon:
                 Timber.d("Brush Button Pressed");
@@ -118,37 +87,37 @@ public class PaintFragment extends Fragment implements View.OnClickListener {
                 setPalleteVisible();
                 break;
             case R.id.black_button:
-                presenter.changeBrushColor(paintView, BLACK);
+                presenter.changeBrushColor(BLACK);
                 break;
             case R.id.blue_button:
-                presenter.changeBrushColor(paintView, BLUE);
+                presenter.changeBrushColor(BLUE);
                 break;
             case R.id.red_button:
-                presenter.changeBrushColor(paintView, RED);
+                presenter.changeBrushColor(RED);
                 break;
             case R.id.green_button:
-                presenter.changeBrushColor(paintView, GREEN);
+                presenter.changeBrushColor(GREEN);
                 break;
             case R.id.magenta_button:
-                presenter.changeBrushColor(paintView, MAGENTA);
+                presenter.changeBrushColor(MAGENTA);
                 break;
             case R.id.yellow_button:
-                presenter.changeBrushColor(paintView, YELLOW);
+                presenter.changeBrushColor(YELLOW);
                 break;
             case R.id.brush_24:
-                presenter.changeBrushWidth(paintView, XLARGE_BRUSH_WIDTH);
+                presenter.changeBrushWidth(XLARGE_BRUSH_WIDTH);
                 break;
             case R.id.brush_18:
-                presenter.changeBrushWidth(paintView, LARGE_BRUSH_WIDTH);
+                presenter.changeBrushWidth(LARGE_BRUSH_WIDTH);
                 break;
             case R.id.brush_12:
-                presenter.changeBrushWidth(paintView, MEDIUM_BRUSH_WIDTH);
+                presenter.changeBrushWidth(MEDIUM_BRUSH_WIDTH);
                 break;
             case R.id.brush_6:
-                presenter.changeBrushWidth(paintView, SMALL_BRUSH_WIDTH);
+                presenter.changeBrushWidth(SMALL_BRUSH_WIDTH);
                 break;
             case R.id.eraser_icon:
-                presenter.eraseCanvas(paintView);
+                presenter.eraseCanvas();
                 break;
             default:
                 break;
@@ -157,39 +126,33 @@ public class PaintFragment extends Fragment implements View.OnClickListener {
 
     private void setBrushWidthVisible() {
         if (!brushVisible) {
-            brush24.setVisibility(View.VISIBLE);
-            brush18.setVisibility(View.VISIBLE);
-            brush12.setVisibility(View.VISIBLE);
-            brush6.setVisibility(View.VISIBLE);
-            eraser.setVisibility(View.VISIBLE);
+            changeVisibility(brushButtons, View.VISIBLE);
             brushVisible = true;
         } else {
-            brush24.setVisibility(View.GONE);
-            brush18.setVisibility(View.GONE);
-            brush12.setVisibility(View.GONE);
-            brush6.setVisibility(View.GONE);
-            eraser.setVisibility(View.GONE);
+            changeVisibility(brushButtons, View.GONE);
             brushVisible = false;
         }
     }
 
     private void setPalleteVisible() {
         if (!palleteVisible) {
-            blackButton.setVisibility(View.VISIBLE);
-            redButton.setVisibility(View.VISIBLE);
-            blueButton.setVisibility(View.VISIBLE);
-            greenButton.setVisibility(View.VISIBLE);
-            magentaButton.setVisibility(View.VISIBLE);
-            yellowButton.setVisibility(View.VISIBLE);
+            changeVisibility(palleteButtons, View.VISIBLE);
             palleteVisible = true;
         } else {
-            blackButton.setVisibility(View.GONE);
-            redButton.setVisibility(View.GONE);
-            blueButton.setVisibility(View.GONE);
-            greenButton.setVisibility(View.GONE);
-            magentaButton.setVisibility(View.GONE);
-            yellowButton.setVisibility(View.GONE);
+            changeVisibility(palleteButtons, View.GONE);
             palleteVisible = false;
+        }
+    }
+
+    private void changeVisibility(List<ImageButton> buttons, int visibilitySetting) {
+        for (ImageButton button : buttons) {
+            button.setVisibility(visibilitySetting);
+        }
+    }
+
+    private void setClickListeners(List<ImageButton> buttons) {
+        for (ImageButton button : buttons) {
+            button.setOnClickListener(this);
         }
     }
 }

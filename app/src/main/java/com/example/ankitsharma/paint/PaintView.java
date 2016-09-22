@@ -3,7 +3,6 @@ package com.example.ankitsharma.paint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.util.AttributeSet;
@@ -15,7 +14,7 @@ import timber.log.Timber;
 /**
  * Created by ankitsharma on 9/19/16.
  */
-public class PaintView extends View {
+public class PaintView extends View implements PaintViewCallback {
 
     private Path drawPath;
     private Paint drawPaint,
@@ -124,6 +123,16 @@ public class PaintView extends View {
         drawPath = new Path();
         drawPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         drawPaint.setColor(getResources().getColor(R.color.paintColor));
+        drawPaint.setAntiAlias(true);
+        drawPaint.setStrokeWidth(ERASER_BRUSH_WIDTH);
+        drawPaint.setStyle(Paint.Style.STROKE);
+        drawPaint.setStrokeJoin(Paint.Join.ROUND);
+        drawPaint.setStrokeCap(Paint.Cap.ROUND);
+    }
+
+    private void setupDrawPath() {
+        drawPath = new Path();
+        drawPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         drawPaint.setAntiAlias(true);
         drawPaint.setStrokeWidth(ERASER_BRUSH_WIDTH);
         drawPaint.setStyle(Paint.Style.STROKE);
