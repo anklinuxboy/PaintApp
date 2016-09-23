@@ -8,8 +8,8 @@ import android.graphics.Path;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
-
 import timber.log.Timber;
+
 
 /**
  * Created by ankitsharma on 9/19/16.
@@ -23,7 +23,6 @@ public class PaintView extends View implements PaintViewCallback {
     private Canvas canvas;
     private Bitmap bitmap;
     private int ERASER_BRUSH_WIDTH = 20;
-
 
     public PaintView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -39,6 +38,11 @@ public class PaintView extends View implements PaintViewCallback {
         setStyle(drawPaint);
 
         canvasPaint = new Paint(Paint.DITHER_FLAG);
+    }
+
+    @Override
+    protected void onMeasure(int width, int height) {
+        setMeasuredDimension(width, height);
     }
 
     @Override
@@ -62,7 +66,6 @@ public class PaintView extends View implements PaintViewCallback {
     public boolean onTouchEvent(MotionEvent event) {
         float touchX = event.getX();
         float touchY = event.getY();
-
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 drawPath.moveTo(touchX, touchY);
@@ -83,35 +86,28 @@ public class PaintView extends View implements PaintViewCallback {
     }
 
     public void onClear() {
-        Timber.d("Inside onClear PaintView");
         canvas.drawColor(getResources().getColor(R.color.paintColor));
         drawPath = new Path();
         invalidate();
     }
 
     public void setBrushColor(int color) {
-        makePathPaintObj();
         drawPaint.setColor(color);
         Utility.saveBrushColorPref(getContext(), color);
         int width = Utility.getBrushWidthPref(getContext());
         drawPaint.setStrokeWidth(width);
-        setStyle(drawPaint);
     }
 
     public void setBrushWidth(int width) {
-        makePathPaintObj();
         int color = Utility.getBrushColorPref(getContext());
         drawPaint.setColor(color);
         drawPaint.setStrokeWidth(width);
         Utility.saveBrushWidthPref(getContext(), width);
-        setStyle(drawPaint);
     }
 
     public void setEraser() {
-        makePathPaintObj();
         drawPaint.setColor(getResources().getColor(R.color.paintColor));
         drawPaint.setStrokeWidth(ERASER_BRUSH_WIDTH);
-        setStyle(drawPaint);
     }
 
     private void makePathPaintObj() {

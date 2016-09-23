@@ -26,6 +26,8 @@ import timber.log.Timber;
 public class PaintFragment extends Fragment implements View.OnClickListener {
     public PaintFragment() {}
 
+    ModelPaintApplication paintApplication;
+
     @BindViews({R.id.pallete_icon, R.id.brush_icon, R.id.delete_icon})
     List<ImageButton> mainButtons;
 
@@ -66,6 +68,8 @@ public class PaintFragment extends Fragment implements View.OnClickListener {
         ButterKnife.bind(this, view);
         presenter = new SimplePresenter(paintView);
 
+        paintApplication = (ModelPaintApplication) getActivity().getApplication();
+
         setClickListeners(mainButtons);
         setClickListeners(palleteButtons);
         setClickListeners(brushButtons);
@@ -77,6 +81,7 @@ public class PaintFragment extends Fragment implements View.OnClickListener {
     public void onSaveInstanceState(Bundle savedInstanceState) {
         savedInstanceState.putBoolean(PALLETE_KEY, palleteVisible);
         savedInstanceState.putBoolean(BRUSH_KEY, brushVisible);
+
         super.onSaveInstanceState(savedInstanceState);
     }
 
@@ -109,7 +114,6 @@ public class PaintFragment extends Fragment implements View.OnClickListener {
                 presenter.clearCanvas();
                 break;
             case R.id.brush_icon:
-                //Log.d("sss", "sdfsfd");
                 Timber.d("Brush Button Pressed");
                 setBrushWidthVisible();
                 break;
