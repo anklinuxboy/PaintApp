@@ -3,10 +3,6 @@ package com.example.ankitsharma.paint;
 import android.app.Fragment;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.IBinder;
-import android.support.annotation.Nullable;
-import android.support.v7.app.WindowDecorActionBar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +22,7 @@ import timber.log.Timber;
 public class PaintFragment extends Fragment implements View.OnClickListener {
     public PaintFragment() {}
 
-    ModelPaintApplication paintApplication;
+    PaintApplication paintApplication;
 
     @BindViews({R.id.pallete_icon, R.id.brush_icon, R.id.delete_icon})
     List<ImageButton> mainButtons;
@@ -68,7 +64,7 @@ public class PaintFragment extends Fragment implements View.OnClickListener {
         ButterKnife.bind(this, view);
         presenter = new SimplePresenter(paintView);
 
-        paintApplication = (ModelPaintApplication) getActivity().getApplication();
+        paintApplication = (PaintApplication) getActivity().getApplication();
 
         setClickListeners(mainButtons);
         setClickListeners(palleteButtons);
@@ -81,7 +77,7 @@ public class PaintFragment extends Fragment implements View.OnClickListener {
     public void onSaveInstanceState(Bundle savedInstanceState) {
         savedInstanceState.putBoolean(PALLETE_KEY, palleteVisible);
         savedInstanceState.putBoolean(BRUSH_KEY, brushVisible);
-
+        setRetainInstance(true);
         super.onSaveInstanceState(savedInstanceState);
     }
 
