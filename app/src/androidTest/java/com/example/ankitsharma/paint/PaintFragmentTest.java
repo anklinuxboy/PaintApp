@@ -35,7 +35,7 @@ import static org.junit.Assert.assertEquals;
  */
 
 @RunWith(AndroidJUnit4.class)
-public class TestPaintFragment {
+public class PaintFragmentTest {
 
     private Context context;
 
