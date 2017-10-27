@@ -1,5 +1,8 @@
 apply plugin: 'com.android.application'
 apply plugin: 'android-apt'
+apply plugin: 'spoon'
+apply from: 'coverage.gradle'
+
 android {
     compileSdkVersion 24
     buildToolsVersion '26.0.2'
